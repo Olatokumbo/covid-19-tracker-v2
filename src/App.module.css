@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.app{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+.app_left{
+    flex: 0.9;
+}
+.app_header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.app_stats {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 830px){
+    .app{
+        flex-direction: column;
+    }
+    .app_right{
+        margin-top: 20px;
+    }
+}
