@@ -8,6 +8,7 @@ import {
   CardContent,
 } from "@material-ui/core";
 import { getCountries, getCountryInfo } from "./api/index";
+import {sortData} from "./util"
 import InfoCard from "./components/InfoCard/InfoCard";
 import Table from "./components/Table/Table";
 import style from "./App.module.css";
@@ -38,7 +39,7 @@ const App = () => {
     <div className={style.app}>
       <div className={style.app_left}>
       <div className={style.app_header}>
-        <Typography variant="h4">COVID-19 Tracker</Typography>
+        <Typography variant="h4" style={{fontWeight: "bold"}}>COVID-19 Tracker</Typography>
         <FormControl>
           <Select default="worldwide" variant="outlined" onChange={onChangeCountry} value={country}>
           <MenuItem value="worldwide">Worldwide</MenuItem>
@@ -57,7 +58,7 @@ const App = () => {
       <Card className={style.app_right}>
       <CardContent>
       <Typography>Live cases by Country</Typography>
-      <Table countries={countries}/>
+      <Table countries={sortData(countries)}/>
       <Typography>Worldwide new cases</Typography>
       </CardContent>
       </Card>
