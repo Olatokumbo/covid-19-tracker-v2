@@ -24,3 +24,28 @@ export const getCountries = async () =>
          return (response.data)
       })
   }
+
+  export const getChartInfo = async ()=>{
+    const url = "https://disease.sh/v3/covid-19/historical/all?lastdays=120";
+    return await axios.get(url).then((response)=>{
+      const data = response.data
+      console.log(data)
+      return buildChartData(data)
+    })
+  }
+
+  const buildChartData = (data, casesType="cases")=>{
+    const chartData = [];
+    let lastDataPoint;
+    for(let date in data[casesType] ){
+        if(lastDataPoint){
+           const newDataPoint = {
+            x: date,
+            y: data[casesType][date] - lastDataPoint,
+           }
+           chartData.push(newDataPoint)
+        }
+        lastDataPoint = data[casesType][date];
+    }
+    return chartData
+}

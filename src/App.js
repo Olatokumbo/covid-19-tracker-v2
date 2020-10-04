@@ -11,6 +11,7 @@ import { getCountries, getCountryInfo } from "./api/index";
 import {sortData} from "./util"
 import InfoCard from "./components/InfoCard/InfoCard";
 import Table from "./components/Table/Table";
+import LineGraph from "./components/LineGraph/LineGraph";
 import style from "./App.module.css";
 const App = () => {
   const [countries, setCountries] = useState([]);
@@ -60,6 +61,7 @@ const App = () => {
       <Typography>Live cases by Country</Typography>
       <Table countries={sortData(countries)}/>
       <Typography>Worldwide new cases</Typography>
+      <LineGraph/>
       </CardContent>
       </Card>
     </div>
