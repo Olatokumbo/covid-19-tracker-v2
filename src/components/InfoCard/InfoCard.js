@@ -7,7 +7,7 @@ const InfoCard = ({ title, cases, total }) => {
       <CardContent>
         <Typography gutterBottom color="textSecondary">{title}</Typography>
         <Typography style={{fontWeight: "bold"}} variant='h6'>{cases}</Typography>
-        <Typography color="textSecondary">{total} Total</Typography>
+        <Typography color="textSecondary" variant='body2'>{total} Total</Typography>
       </CardContent>
     </Card>
   );
