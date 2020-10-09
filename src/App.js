@@ -18,9 +18,10 @@ import "leaflet/dist/leaflet.css";
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
-  const [countryInfo, setCountryInfo] = useState("");
+  const [countryInfo, setCountryInfo] = useState([]);
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
+  const [casesType, setCasesType] = useState("cases");
 
   useEffect(() => {
     const getWorldWideInfo = async () => {
@@ -37,7 +38,14 @@ const App = () => {
 
   const onChangeCountry = async (e) => {
     setCountry(e.target.value);
-    setCountryInfo(await getCountryInfo(e.target.value));
+    await getCountryInfo(e.target.value).then((data)=>{
+      setCountryInfo(data)
+      if(country==="worldwide")
+      setMapCenter([34.80746, -40.4796])
+      else
+      setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+      setMapZoom(4);
+    });
   };
 
   return (
@@ -65,29 +73,37 @@ const App = () => {
         </div>
         <div className={style.app_stats}>
           <InfoCard
+            isRed
+            active={casesType === "cases"}
+            onClick={(e) => setCasesType("cases")}
             title="Cases"
             total={countryInfo.cases}
             cases={countryInfo.todayCases}
           />
           <InfoCard
-            title="Deaths"
+            active={casesType === "recovered"}
+            onClick={(e) => setCasesType("recovered")}
+            title="Recovered"
             total={countryInfo.recovered}
             cases={countryInfo.todayRecovered}
           />
           <InfoCard
-            title="Recovered"
+            isRed
+            active={casesType === "deaths"}
+            onClick={(e) => setCasesType("deaths")}
+            title="Deaths"
             total={countryInfo.deaths}
             cases={countryInfo.todayDeaths}
           />
         </div>
-        <Map center={mapCenter} zoom={mapZoom} />
+        <Map center={mapCenter} zoom={mapZoom} countries={countries} casesType={casesType}/>
       </div>
       <Card className={style.app_right}>
         <CardContent>
           <Typography>Live cases by Country</Typography>
           <Table countries={sortData(countries)} />
-          <Typography>Worldwide new cases</Typography>
-          <LineGraph />
+          <Typography>Worldwide new {casesType}</Typography>
+          <LineGraph casesType={casesType} />
         </CardContent>
       </Card>
     </div>

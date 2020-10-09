@@ -48,14 +48,15 @@ const options = {
     },
   };
 
-const LineGraph = () => {
+const LineGraph = ({casesType}) => {
   const [data, setData] = useState(null);
   useEffect(() => {
     const chartData = async () => {
-      setData(await getChartInfo());
+      setData(await getChartInfo(casesType));
+
     };
     chartData();
-  }, []);
+  }, [casesType]);
   return (
     <div>
     {data?.length > 0 && (

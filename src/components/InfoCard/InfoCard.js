@@ -1,13 +1,16 @@
 import React from "react";
 import { Card, CardContent, Typography } from "@material-ui/core";
-
-const InfoCard = ({ title, cases, total }) => {
+import { prettyPrintStat } from "../../util";
+import style from "./InfoCard.module.css";
+const InfoCard = ({ title, cases, active, isRed,  total, ...props }) => {
   return (
-    <Card>
+    <Card className={active ? style.infoCardSelected :style.infoCard}
+    onClick={props.onClick}
+    >
       <CardContent>
-        <Typography gutterBottom color="textSecondary">{title}</Typography>
-        <Typography style={{fontWeight: "bold"}} variant='h6'>{cases}</Typography>
-        <Typography color="textSecondary" variant='body2'>{total} Total</Typography>
+        <Typography color="textSecondary">{title}</Typography>
+        <Typography className={!isRed ? style.infoCardCasesGreen :style.infoCardCases} variant='h6'>{prettyPrintStat(cases)}</Typography>
+        <Typography className={style.infoCardTotal}>{prettyPrintStat(total)} Total</Typography>
       </CardContent>
     </Card>
   );

@@ -25,12 +25,12 @@ export const getCountries = async () =>
       })
   }
 
-  export const getChartInfo = async ()=>{
+  export const getChartInfo = async (casesType)=>{
     const url = "https://disease.sh/v3/covid-19/historical/all?lastdays=120";
     return await axios.get(url).then((response)=>{
       const data = response.data
       console.log(data)
-      return buildChartData(data)
+      return buildChartData(data, casesType)
     })
   }
 

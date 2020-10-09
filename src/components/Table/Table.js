@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
+import numeral from "numeral";
 import style from "./Table.module.css";
 const Table = ({ countries }) => {
   return (
@@ -12,7 +13,7 @@ const Table = ({ countries }) => {
               </td>
               <td>
                 <Typography className={style.cases} variant="subtitle2">
-                  {cases}
+                  {numeral(cases).format("0,0")}
                 </Typography>
               </td>
             </tr>
