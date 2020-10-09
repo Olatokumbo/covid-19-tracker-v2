@@ -1,8 +1,8 @@
 ## COVID-19 TRACKER V2
 
-This is a fully functional website that was developed using the React framework. This website is capable of displaying various data regarding covid-19 pandemic such as total cases, total recovered, and deaths. Additionally, it is also equiped with dynamic map, graph, and tables which would better visualize the data coming from the API. 
+This is a fully functional website that was developed using the React framework. This website is capable of displaying various data regarding covid-19 pandemic such as the total cases, total recovered, and deaths. Additionally, it is also equipped with a dynamic map, graph, and table which would better visualize the data coming from the API. 
 
 ### Info
-I was able to request the data from [Disease.sh](http://disease.sh/) 
+The API service that was used was [Disease.sh](http://disease.sh/) 
 
 ![](covid.png)
