@@ -16,10 +16,11 @@ import Map from "./components/Map/Map";
 import style from "./App.module.css";
 import "leaflet/dist/leaflet.css";
 const App = () => {
+  const center = { lat: 34.80746, lng: -40.4796 };
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState([]);
-  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [mapCenter, setMapCenter] = useState(center);
   const [mapZoom, setMapZoom] = useState(3);
   const [casesType, setCasesType] = useState("cases");
 
@@ -40,11 +41,13 @@ const App = () => {
     setCountry(e.target.value);
     await getCountryInfo(e.target.value).then((data)=>{
       setCountryInfo(data)
-      if(country==="worldwide")
+      if (typeof data.countryInfo !== "undefined") {
+        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        setMapZoom(4);
+      }
+      else if(country ==='worldwide')
       setMapCenter([34.80746, -40.4796])
-      else
-      setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-      setMapZoom(4);
+      setMapZoom(3)
     });
   };
 
